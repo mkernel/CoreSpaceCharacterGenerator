@@ -86,6 +86,11 @@ $(window).on('load',function(){
 		}
 		if(dataset.updated || readurl) {
 			//some values have been updated. we have to reapply them to the corresponding inputs.
+			if(readurl) {
+				$("#character_race").val(dataset.CharacterRace);
+				$("#character_name").val(dataset.CharacterName);
+				$("#character_type").val(dataset.CharacterType);
+			}
 			$("#max_health").val(dataset.maxHealth);
 			$("#avail_health").val(dataset.availHealth);
 			$("#max_actions").val(dataset.maxActions);
