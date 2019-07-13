@@ -4,7 +4,7 @@ class CharacterRenderer {
 	
 	
 	constructor(canvas) {
-		this.font = new FontFace('terminator','url(films.terminat.ttf)');
+		this.font = new FontFace('terminator','url(Terminat.woff)');
 		this.fontLoaded=false;
 		this.canvas = $("#canvas")[0];
 		this.font.load().then((function(font) {
