@@ -1,0 +1,404 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+		<style>
+			@font-face {
+				font-family: "Terminat";
+				src: url('films.terminat.ttf');
+			}
+			* {
+				font-family: "Helvetica";
+			}
+			#resources {
+				display: none;
+			}
+			#canvas {
+				background-color: red;
+			}
+			
+			.number {
+				width: 20;
+			}
+			.text {
+				height: 31px;
+				font-size: 1em;
+			}
+			
+			select {
+				font-size: 1em;
+			}
+			
+			.label {
+				display: inline-block;
+				width: 150px;
+				margin-right: 10px;
+				text-align: right;
+				vertical-align: middle;
+			}
+			.item {
+				padding-bottom: 5px;
+				height: 40px;
+			}
+			.item:before {
+				content: "";
+				display: inline-block;
+				vertical-align: middle;
+				height: 100%;
+			}
+			
+			.ui-spinner {
+				vertical-align: middle;
+			}
+			
+			.setup {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				align-content: flex-start;
+			}
+			
+			.setup > * {
+				flex-basis: 100%;
+				margin-right: 10px;
+			}
+			.setup .character {
+				flex-basis: auto;
+				flex-grow: 0;
+			}
+			
+			.setup .stats {
+				flex-basis: auto;
+				flex-grow: 1;
+			}
+			
+			.setup .career {
+				flex-basis: auto;
+				flex-grow: 0;
+			}
+			
+			.setup .skills {
+				flex-basis: 300px;
+				flex-grow: 0;
+			}
+			
+			.setup .linebreak {
+				flex-basis: 100%;
+				border: 0;
+			}
+			
+			.content {
+				width: 800px;
+				margin-left: auto;
+				margin-right: auto;
+				background-color: white;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			
+			.footer {
+				padding-bottom: 10px;
+			}
+			
+			canvas {
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
+			html {
+				background-color: gray;
+			}
+			body {
+				margin: 0;
+			}
+			
+			h1 {
+				padding-top: 10px;
+				font-family: "Terminat";
+				text-transform: uppercase;
+				text-align: center;
+			}
+			
+			#validation_errors h3 {
+				color: red;
+				text-align: center;
+				font-size: 1.5em;
+			}
+			
+			#validation_errors p {
+				font-size: 1.2em;
+			}
+			#validation_errors {
+				background-color: rgba(255,172,172,0.8);
+				width: 100%;
+				height: 100%;
+				padding-left: 10px;
+				padding-right: 10px;
+				box-sizing: border-box;
+				border-radius: 18px;
+			}
+			
+			.rendering {
+				position: relative;
+				width: 759px;
+				height: 582px;
+				margin-left: auto;
+				margin-right: auto;				
+			}
+			
+			.rendering > * {
+				position: absolute;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="jquery-ui/jquery-ui.js"></script>
+		<script src="renderer.js"></script>
+		<script src="logic.js"></script>
+		<script src="userinput.js"></script>
+	</head>
+	<body>
+		<div id="resources">
+			<img id="layer0" src="Layer0_background.png">
+			<img id="layer1" >
+			<img id="layer2" src="Layer2_armour.png">
+			<img id="layer3" src="Layer3_markers.png">
+			<img id="layer4" src="Layer4_activemarkers.png">
+			<img id="layer5" src="Layer5_text.png">
+			
+			<img id="health0" src="Layer3_health_0.png">
+			<img id="health1" src="Layer3_health_1.png">
+			<img id="health2up" src="Layer3_health_2up.png">
+			
+			<img id="actions" src="Layer3_action_0up.png">
+			
+			<img id="skills" src="Layer3_skill_0up.png">
+			
+			<img id="career" src="Layer3_career_0up.png">
+			
+			<img id="active" src="Layer4_active.png">
+			<div class="skills">
+				<div data-class="Augmented">
+					<img data-name="Accelerate" src="Bits/augmented__accelerate.png">
+					<img data-name="Blast" src="Bits/augmented__blast.png">
+					<img data-name="Energise" src="Bits/augmented__energise.png">
+					<img data-name="Manipulate" src="Bits/augmented__manipulate">
+				</div>
+				<div data-class="Close Assault">
+					<img data-name="Combat Expert" src="Bits/close_assault__combat_expert.png">
+					<img data-name="Disarm" src="Bits/close_assault__disarm.png"/>
+					<img data-name="Kata" src="Bits/close_assault__kata.png" />
+					<img data-name="Reflexes" src="Bits/close_assault__reflexes.png"/>
+				</div>
+				<div data-class="Cunning">
+					<img data-name="Distraction" src="Bits/cunning__distraction.png" />
+					<img data-name="Evade" src="Bits/cunning__evade.png" />
+					<img data-name="Light Fingers" src="Bits/cunning__light_fingers.png" />
+					<img data-name="Persuasion" src="Bits/cunning__persuasion.png" />
+				</div>
+				<div data-class="Endurance">
+					<img data-name="Impervious" src="Bits/endurance__impervious.png" alt="endurance__impervious" width="130" height="130" />
+					<img data-name="Onslaught" src="Bits/endurance__onslaught.png" alt="endurance__onslaught" width="130" height="130" />
+					<img data-name="Stubborn" src="Bits/endurance__stubborn.png" alt="endurance__stubborn" width="130" height="130" />
+					<img data-name="Walk it off" src="Bits/endurance__walk_it_off.png" alt="endurance__walk_it_off" width="130" height="130" />
+				</div>
+				<div data-class="Machine">
+					<img data-name="Bodyguard Protocol" src="Bits/machine__bodyguard_protocol.png" alt="machine__bodyguard_protocol" width="130" height="130" />
+					<img data-name="Overdrive" src="Bits/machine__overdrive.png" alt="machine__overdrive" width="130" height="130" />
+					<img data-name="Repair" src="Bits/machine__repair.png" alt="machine__repair" width="130" height="130" />
+					<img data-name="Reroute" src="Bits/machine__reroute.png" alt="machine__reroute" width="130" height="130" />
+					<img data-name="Scanners" src="Bits/machine__scanners.png" alt="machine__scanners" width="130" height="130" />
+				</div>
+				<div data-class="Merg">
+					<img data-name="Charge" src="Bits/merg__charge.png" alt="merg__charge" width="130" height="130" />
+					<img data-name="Disconnect" src="Bits/merg__disconnect.png" alt="merg__disconnect" width="130" height="130" />
+					<img data-name="Heel" src="Bits/merg__heel.png" alt="merg__heel" width="130" height="130" />
+					<img data-name="Sonic roar" src="Bits/merg__sonic_roar.png" alt="merg__sonic_roar" width="130" height="130" />
+				</div>
+				<div data-class="Ranged">
+					<img data-name="Counter shot" src="Bits/ranged__counter_shot.png" alt="ranged__counter_shot" width="130" height="130" />
+					<img data-name="Marksman" src="Bits/ranged__marksman.png" alt="ranged__marksman" width="130" height="130" />
+					<img data-name="Sure shot" src="Bits/ranged__sure_shot.png" alt="ranged__sure_shot" width="130" height="130" />
+					<img data-name="Weapons expert" src="Bits/ranged__weapons_expert.png" alt="ranged__weapons_expert" width="130" height="130" />
+				</div>
+				<div data-class="Stealth">
+					<img data-name="Ambush" src="Bits/stealth__ambush.png" alt="stealth__ambush" width="130" height="130" />
+					<img data-name="Camouflage" src="Bits/stealth__camouflage.png" alt="stealth__camouflage" width="130" height="130" />
+					<img data-name="Fade to black" src="Bits/stealth__fade_to_black.png" alt="stealth__fade_to_black" width="130" height="130" />
+					<img data-name="Hard to hit" src="Bits/stealth__hard_to_hit.png" alt="stealth__hard_to_hit" width="130" height="130" />
+				</div>
+				<div data-class="Tech">
+					<img data-name="Assist" src="Bits/tech__assist.png" alt="tech__assist" width="130" height="130" />
+					<img data-name="Disrupt" src="Bits/tech__disrupt.png" alt="tech__disrupt" width="130" height="130" />
+					<img data-name="Hack" src="Bits/tech__hack.png" alt="tech__hack" width="130" height="130" />
+					<img data-name="Regulate" src="Bits/tech__regulate.png" alt="tech__regulate" width="130" height="130" />
+				</div>
+			</div>
+			<img id="skill_base" src="Bits/skill_base.png" alt="skill_base" width="130" height="130" />
+			<img id="skill_marker" src="Bits/skill_marker.png" alt="skill_marker" width="49" height="50" />
+			<div class="skills-general">
+				<img data-name="Armour" src="Bits/skill__general__armour.png" alt="skill__general__armour" width="130" height="130" />
+				<img data-name="Huge" src="Bits/skill__general__huge.png" alt="skill__general__close_combat" width="130" height="130" />
+				<img data-name="Close combat" src="Bits/skill__general__close_combat.png" width="130" height="130" />
+				<img data-name="Move" src="Bits/skill__general__move.png" alt="skill__general__move" width="130" height="130" />
+				<img data-name="Move and close combat" src="Bits/skill__general__move_n_fight.png" alt="skill__general__move_n_fight" width="130" height="130" />
+				<img data-name="Ranged attack" src="Bits/skill__general__ranged_attack.png" alt="skill__general__ranged_attack" width="130" height="130" />
+				<img data-name="Resurrect" src="Bits/skill__general__ressurect.png" alt="skill__general__ressurect" width="130" height="130" />
+				<img data-name="Climb and jump" src="Bits/skill__general_climb_jump.png" alt="skill__general_climb_jump" width="130" height="130" />
+				<img data-name="Huge" src="Bits/skill__general__huge.png" width="130" height="130" />
+			</div>
+		</div>
+		<div class="content">
+			<h1>Core Space Character Creator</h1>
+			<div class="setup">
+				<div class="character">
+					<h2>Define your character</h2>
+					<div class="item">
+						<span class="label">Race</span><input type="text" class="text" id="character_race">
+					</div>
+					<div class="item">
+						<span class="label">Name</span><input type="text" class="text" id="character_name">
+					</div>
+					<div class="item">
+						<span class="label">Type</span><input type="text" class="text" id="character_type">
+					</div>
+					<div class="item">
+						<span class="label">Image</span> <input type="file" class="text" id="character_image" />
+					</div>
+				</div>
+				<div class="stats">
+					<h2>Stats</h2>
+					<div class="item">
+						<span class="label">Maximum Health</span><input type="text" class="number" readonly="readonly" id="max_health" min="3" max="7" step="1" value="3" />
+					</div>
+					<div class="item">
+						<span class="label">Available Health</span><input type="text" class="number" readonly="readonly" id="avail_health" min="3" max="7" step="1" value="3" />
+					</div>
+					<div class="item">
+						<span class="label">Maximum Action Points</span><input type="text" class="number" readonly="readonly" id="max_actions" min="1" max="3" step="1" value="1" />
+					</div>
+					<div class="item">
+						<span class="label">Maximum Skill Points</span><input type="text" class="number" readonly="readonly" id="max_skills" min="1" max="7" step="1" value="1" />
+					</div>
+					<div class="item">
+						<span class="label">Available Skill Points</span><input type="text" class="number" readonly="readonly" id="avail_skills" min="1" max="7" step="1" value="1" />
+					</div>
+				</div>
+				<hr class="linebreak" />
+				<div class="skills">
+					<h2>Skills</h2>
+					<p>You can pick up to three additinal Skills or Abilities. The third one will share its space with possible armour equipment.</p>
+					<h3>Primary</h3>
+					<div class="primary skillset">
+						<div class="item type">
+							<span class="label">Choose</span>
+							<select class="type">
+								<option value="NONE">None</option>
+								<option value="GENERIC">Ability</option>
+								<option value="SKILL">Skill</option>
+							</select>
+						</div>
+						<div class="item GENERIC">
+							<span class="label">Ability</span>
+							<select class="GENERIC"><option value="null">Choose</option></select>
+						</div>
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+						<div class="item valueX">
+							<span class="label">Value</span>
+							<input type="text" readonly="readonly" class="number" value="0" min="0" max="10" step="1" class="valueX"/>
+						</div>
+						<div class="item valueY">
+							<span class="label">Value</span>
+							<input type="text" readonly="readonly" class="number" value="0" min="0" max="10" step="1" class="valueY"/>
+						</div>
+					</div>
+					<h3>Secondary</h3>
+					<div class="secondary skillset">
+						<div class="item type">
+							<span class="label">Choose</span>
+							<select class="type">
+								<option value="NONE">None</option>
+								<option value="GENERIC">Ability</option>
+								<option value="SKILL">Skill</option>
+							</select>
+						</div>
+						<div class="item GENERIC">
+							<span class="label">Ability</span>
+							<select class="GENERIC"><option value="null">Choose</option></select>
+						</div>
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+						<div class="item valueX">
+							<span class="label">Value</span>
+							<input type="text" readonly="readonly" class="number" value="0" min="0" max="10" step="1" class="valueX"/>
+						</div>
+						<div class="item valueY">
+							<span class="label">Value</span>
+							<input type="text" readonly="readonly" class="number" value="0" min="0" max="10" step="1" class="valueY"/>
+						</div>
+					</div>
+					<h3>Tertiary</h3>
+					<div class="tertiary skillset">
+						<div class="item type">
+							<span class="label">Choose</span>
+							<select class="type">
+								<option value="NONE">None</option>
+								<option value="GENERIC">Ability</option>
+								<option value="SKILL">Skill</option>
+							</select>
+						</div>
+						<div class="item GENERIC">
+							<span class="label">Ability</span>
+							<select class="GENERIC"><option value="null">Choose</option></select>
+						</div>
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+						<div class="item valueX">
+							<span class="label">Value</span>
+							<input type="text" readonly="readonly" class="number" value="0" min="0" max="10" step="1" class="valueX"/>
+						</div>
+						<div class="item valueY">
+							<span class="label">Value</span>
+							<input type="text" readonly="readonly" class="number" value="0" min="0" max="10" step="1" class="valueY"/>
+						</div>
+					</div>
+				</div>
+				<div class="career">
+					<h2>Career</h2>
+					<div class="item">
+						<span class="label">Points needed for Level 1</span><input type="text" class="number" readonly="readonly" id="max_career_1" min="0" max="7" step="1" value="5" />
+					</div>
+					<div class="item">
+						<span class="label">Points needed for Level 2</span><input type="text" class="number" readonly="readonly" id="max_career_2" min="0" max="5" step="1" value="0" />
+					</div>
+					<div class="item">
+						<span class="label">Points needed for Level 3</span><input type="text" class="number" readonly="readonly" id="max_career_3" min="0" max="3" step="1" value="0" />
+					</div>
+				</div>
+			</div>
+			<div class="rendering">
+				<canvas id="canvas" width="759" height="582">
+				</canvas>
+				<div id="validation_errors">
+				</div>
+			</div>
+			<div class="footer">
+				<p class="save">
+					<a target="_blank" class="download">Download</a>
+				</p>
+				<p class="save">If you want to keep the configuration and come back later, Bookmark <a class="save">this link</a>. It contains all attributes and settings (except the character image).
+				</p>
+				<p class="copyright">Core Space and all associated characters, names, places and things are ™ and © Battle Systems Ltd 2019. Used with permission. <a href="http://www.battlesystems.co.uk">www.battlesystems.co.uk</a></p>
+			</div>
+		</div>
+	</body>
+</html>
