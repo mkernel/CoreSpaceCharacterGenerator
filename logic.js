@@ -49,6 +49,10 @@ class BusinessLogic {
 			dataset.availHealth = dataset.maxHealth - career_levels;
 			dataset.updated = true;
 		}
+		if(dataset.availHealth > dataset.maxHealth) {
+			dataset.availHealth = dataset.maxHealth;
+			dataset.updated = true;
+		}
 		if(dataset.availSkills < dataset.maxSkills - career_levels) {
 			dataset.availSkills = dataset.maxSkills - career_levels;
 			dataset.updated = true;
