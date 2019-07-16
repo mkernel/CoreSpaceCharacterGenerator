@@ -100,6 +100,16 @@ class BusinessLogic {
 					set.ValueX = 3;
 					dataset.updated = true;
 				}
+				if(set.Skill[0] =="Merg")
+				{
+					if(set.Skill[1] == "Charge" || set.Skill[1] == "Disconnect" || set.Skill[1] == "Sonic roar")
+					{
+						if( set.ValueX > 2) {
+							set.ValueX = 2;
+							dataset.updated = true;
+						}
+					}
+				}
 			}
 			if(set.Type=="GENERIC") {
 				if(set.Skill == "Close combat") {
