@@ -137,6 +137,16 @@ $(window).on('load',function(){
 			$("#layer1").attr("src",e.target.result);
 		}
 		reader.readAsDataURL(file);
+		$("#character_image").hide();
+		$("#remove_image").show();
+	});
+	$("#remove_image").on('click',function(){
+		$("#layer1").attr('src','');
+		$("#character_image").val('');
+		$("#remove_image").hide();
+		$("#character_image").show();
+		kickoff();
+		
 	});
 	$("#layer1").on('load',function(){
 		window.renderer.render();
