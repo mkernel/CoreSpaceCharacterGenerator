@@ -4,14 +4,18 @@ class CharacterRenderer {
 	
 	
 	constructor(canvas) {
-		this.font = new FontFace('terminator','url(Terminat.woff)');
-		this.fontLoaded=false;
 		this.canvas = $("#canvas")[0];
-		this.font.load().then((function(font) {
-			document.fonts.add(font);
+		if(typeof(FontFace) != 'undefined') {
+			this.font = new FontFace('terminator','url(Terminat.woff)');
+			this.fontLoaded=false;
+			this.font.load().then((function(font) {
+				document.fonts.add(font);
+				this.fontLoaded=true;
+				this.canvas.dispatchEvent(new CustomEvent('fontLoaded'));
+			}).bind(this));			
+		} else {
 			this.fontLoaded=true;
-			this.canvas.dispatchEvent(new CustomEvent('fontLoaded'));
-		}).bind(this));
+		}
 		this.context = canvas.getContext('2d');
 		
 		this.layers = [
@@ -215,7 +219,11 @@ class CharacterRenderer {
 		context.save();
 		context.translate(centerX,centerY);
 		context.scale(0.8,0.8);
-		context.font = "37px terminator";
+		if(typeof(FontFace) =='undefined') {
+			context.font = "37px Terminat";
+		} else {
+			context.font = "37px terminator";
+		}
 		context.strokeStyle="black";
 		context.fillStyle="black";
 		context.textAlign="center";
@@ -294,21 +302,33 @@ class CharacterRenderer {
 				);
 			}
 		}
-				
-		context.font = "55px terminator";
+
+		if(typeof(FontFace) =='undefined') {
+			context.font = "55px Terminat";
+		} else {
+			context.font = "55px terminator";
+		}				
 		context.fillStyle = "black";
 		context.strokeStyle = "white";
 		context.lineWidth = 2;
 		context.fillText(this.CharacterRace,22,59);
 		context.strokeText(this.CharacterRace,22,59);
 		
-		context.font = "49px terminator";
+		if(typeof(FontFace) =='undefined') {
+			context.font = "49px Terminat";
+		} else {
+			context.font = "49px terminator";
+		}
 		context.fillStyle = "#eee";
 		context.strokeStyle = "black";
 		context.fillText(this.CharacterName,292,59);
 		context.strokeText(this.CharacterName,292,59);
 		
-		context.font = "59px terminator";
+		if(typeof(FontFace) =='undefined') {
+			context.font = "59px Terminat";
+		} else {
+			context.font = "59px terminator";
+		}
 		var text = this.CharacterPoints + "";
 		if(this.CharacterPoints < 10) {
 			text = "0"+text;
@@ -320,7 +340,11 @@ class CharacterRenderer {
 		this.drawSkill(180,520, this.SpecialSkills.Secondary);
 		this.drawSkill(610,430, this.SpecialSkills.Tertiary);
 		
-		context.font = "37px terminator";
+		if(typeof(FontFace) =='undefined') {
+			context.font = "37px Terminat";
+		} else {
+			context.font = "37px terminator";
+		}
 		context.lineWidth = 1.5;
 		context.fillText(this.CharacterType,363,559);
 		context.strokeText(this.CharacterType,363,559);

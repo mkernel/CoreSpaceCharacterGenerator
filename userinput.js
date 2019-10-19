@@ -231,6 +231,9 @@ $(window).on('load',function(){
 		kickoff();
 	});
 	//finally: when everything is loaded, one kickoff to get everything in sync.
+	if(renderer.fontLoaded == true) {
+		kickoff(true);
+	}
 	$("#canvas").on('fontLoaded',function(){
 		kickoff(true);
 	});
