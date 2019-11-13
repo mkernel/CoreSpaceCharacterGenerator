@@ -2,7 +2,7 @@
 
 class BusinessLogic {
 	constructor() {
-		
+		this.lastPointValue=0;
 	}
 	
 	career_levels(dataset) {
@@ -148,6 +148,10 @@ class BusinessLogic {
 		if(dataset.valid == false) {
 			dataset.CharacterPoints = -1;
 		} else {
+			if (dataset.pointsFrozen == true) {
+				dataset.CharacterPoints = this.lastPointValue;
+				return dataset;
+			}
 			var points = 0;
 			points += dataset.maxHealth*2;
 			points += dataset.maxActions*4;
@@ -205,6 +209,7 @@ class BusinessLogic {
 				}
 			});
 			dataset.CharacterPoints = points;
+			this.lastPointValue = points;
 		}
 		return dataset;
 	}

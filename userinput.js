@@ -7,6 +7,7 @@ $(window).on('load',function(){
 		window.kickingoff=true;
 		//lets create a characterset.
 		var dataset={};
+		dataset.pointsFrozen = $("#freeze_points").is(':checked');
 		dataset.maxHealth = parseInt($("#max_health").val());
 		dataset.availHealth = parseInt($("#avail_health").val());
 		dataset.maxActions = parseInt($("#max_actions").val());
@@ -14,7 +15,24 @@ $(window).on('load',function(){
 		dataset.maxSkills = parseInt($("#max_skills").val());
 		dataset.availSkills = parseInt($("#avail_skills").val());
 		dataset.maxCareer = [parseInt($("#max_career_1").val()),parseInt($("#max_career_2").val()),parseInt($("#max_career_3").val())];
-		dataset.availCareer = [Math.ceil(dataset.maxCareer[0]/2)];
+		var calc = Math.ceil(dataset.maxCareer[0]/2) + parseInt($("#career_spent").val());
+		var result = [0,0,0];
+		if (calc > dataset.maxCareer[0]) {
+			result[0]=dataset.maxCareer[0];
+			calc -= dataset.maxCareer[0];
+		} else {
+			result[0] = calc;
+			calc = 0;
+		}
+		if (calc > dataset.maxCareer[1]) {
+			result[1] = dataset.maxCareer[1];
+			calc -= dataset.maxCareer[1];
+		} else {
+			result[1] = calc;
+			calc=0;
+		}
+		result[2] = calc;
+		dataset.availCareer = result;
 		dataset.CharacterRace = $("#character_race").val().toUpperCase();
 		dataset.CharacterName = $("#character_name").val().toUpperCase();
 		dataset.CharacterType = $("#character_type").val().toUpperCase();

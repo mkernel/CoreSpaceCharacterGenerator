@@ -75,6 +75,10 @@
 			.setup .character p {
 				max-width: 400px;
 			}
+			
+			.setup .career p {
+				max-width: 200px;
+			}
 						
 			.setup .career {
 				flex-basis: auto;
@@ -391,6 +395,14 @@
 					</div>
 					<div class="item">
 						<span class="label">Points needed for Level 3</span><input type="text" class="number" readonly="readonly" id="max_career_3" min="0" max="3" step="1" value="0" />
+					</div>
+					<div class="item">
+						<span class="label">Additional Career spent</span><input type="text" class="number" readonly="readonly" id="career_spent" min="0" max="11" step="1" value="0" />
+					</div>
+					<div class="item">
+						<span class="label">Freeze Point Value</span><input type="checkbox" id="freeze_points"/>
+						<p>Note: career spent and freezing the point value does not work for saving characters.</p>
+
 					</div>
 				</div>
 			</div>
