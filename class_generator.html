@@ -148,8 +148,8 @@
 			
 			.rendering {
 				position: relative;
-				width: 759px;
-				height: 582px;
+				width: 761px;
+				height: 263px;
 				margin-left: auto;
 				margin-right: auto;				
 			}
@@ -160,30 +160,17 @@
 		</style>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="jquery-ui/jquery-ui.js"></script>
-		<script src="character/renderer.js"></script>
-		<script src="character/logic.js"></script>
-		<script src="character/userinput.js"></script>
 	</head>
 	<body>
 		<div id="resources">
-			<img id="layer0" src="Layer0_background.png">
-			<img id="layer1" >
-			<img id="layer2" src="Layer2_armour.png">
-			<img id="layer3" src="Layer3_markers.png">
-			<img id="layer4" src="Layer4_activemarkers.png">
-			<img id="layer5" src="Layer5_text.png">
-			
-			<img id="health0" src="Layer3_health_0.png">
-			<img id="health1" src="Layer3_health_1.png">
-			<img id="health2up" src="Layer3_health_2up.png">
-			
-			<img id="actions" src="Layer3_action_0up.png">
-			
-			<img id="skills" src="Layer3_skill_0up.png">
-			
-			<img id="career" src="Layer3_career_0up.png">
-			
-			<img id="active" src="Layer4_active.png">
+			<img id="background_red" src="class_bits/background_red.png">
+			<img id="background_green" src="class_bits/background_green.png">
+			<img id="background_blue" src="class_bits/background_blue">
+			<img id="background_purple" src="class_bits/background_purple">
+			<img id="background_yellow" src="class_bits/background_yellow">
+			<img id="artwork" src="class_bits/artwork.png">
+			<img id="template_normal" src="class_bits/template_normal.png">
+			<img id="template_mech" src="class_bits/template_mech.png">
 			<div class="skills">
 				<div data-class="Augmented">
 					<img data-name="Accelerate" src="Bits/augmented__accelerate.png">
@@ -241,75 +228,14 @@
 					<img data-name="Regulate" src="Bits/tech__regulate.png" alt="tech__regulate" width="130" height="130" />
 				</div>
 			</div>
-			<img id="skill_base" src="Bits/skill_base.png" alt="skill_base" width="130" height="130" />
-			<img id="skill_marker" src="Bits/skill_marker.png" alt="skill_marker" width="49" height="50" />
-			<div class="skills-general">
-				<img data-name="Armour" src="Bits/skill__general__armour.png" alt="skill__general__armour" width="130" height="130" />
-				<img data-name="Huge" src="Bits/skill__general__huge.png" alt="skill__general__close_combat" width="130" height="130" />
-				<img data-name="Close combat" src="Bits/skill__general__close_combat.png" width="130" height="130" />
-				<img data-name="Move" src="Bits/skill__general__move.png" alt="skill__general__move" width="130" height="130" />
-				<img data-name="Move and close combat" src="Bits/skill__general__move_n_fight.png" alt="skill__general__move_n_fight" width="130" height="130" />
-				<img data-name="Ranged attack" src="Bits/skill__general__ranged_attack.png" alt="skill__general__ranged_attack" width="130" height="130" />
-				<img data-name="Resurrect" src="Bits/skill__general__ressurect.png" alt="skill__general__ressurect" width="130" height="130" />
-				<img data-name="Climb and jump" src="Bits/skill__general_climb_jump.png" alt="skill__general_climb_jump" width="130" height="130" />
-				<img data-name="Huge" src="Bits/skill__general__huge.png" width="130" height="130" />
-			</div>
 		</div>
 		<div class="content">
-			<h1>Core Space Character Creator</h1>
+			<h1>Core Space Class Creator</h1>
 			<div class="setup">
-				<div class="character">
-					<h2>Define your character</h2>
-					<div class="item">
-						<span class="label">Race</span><input type="text" class="text" id="character_race">
-					</div>
-					<div class="item">
-						<span class="label">Name</span><input type="text" class="text" id="character_name">
-					</div>
-					<div class="item">
-						<span class="label">Type</span><input type="text" class="text" id="character_type">
-					</div>
-					<div class="item">
-						<span class="label">Image</span> <input type="file" class="text" id="character_image" /> <button id="remove_image" value="Remove">Remove</button>
-					</div>
-					<p>Note: when decreasing maximum values you might to decrease available values as well. The rules allow to decrease the gap between available and maximum values by spending points.</p>
-				</div>
-				<div class="stats">
-					<h2>Stats</h2>
-					<div class="item">
-						<span class="label">Maximum Health</span><input type="text" class="number" readonly="readonly" id="max_health" min="3" max="7" step="1" value="3" />
-					</div>
-					<div class="item">
-						<span class="label">Available Health</span><input type="text" class="number" readonly="readonly" id="avail_health" min="2" max="7" step="1" value="2" />
-					</div>
-					<div class="item">
-						<span class="label">Maximum Action Points</span><input type="text" class="number" readonly="readonly" id="max_actions" min="1" max="3" step="1" value="1" />
-					</div>
-					<div class="item">
-						<span class="label">Maximum Skill Points</span><input type="text" class="number" readonly="readonly" id="max_skills" min="1" max="7" step="1" value="1" />
-					</div>
-					<div class="item">
-						<span class="label">Available Skill Points</span><input type="text" class="number" readonly="readonly" id="avail_skills" min="1" max="7" step="1" value="1" />
-					</div>
-				</div>
-				<hr class="linebreak" />
 				<div class="skills">
 					<h2>Skills</h2>
-					<p>You can pick up to three additinal Skills or Abilities. The third one will share its space with possible armour equipment.</p>
 					<h3>Primary</h3>
 					<div class="primary skillset">
-						<div class="item type">
-							<span class="label">Choose</span>
-							<select class="type">
-								<option value="NONE">None</option>
-								<option value="GENERIC">Ability</option>
-								<option value="SKILL">Skill</option>
-							</select>
-						</div>
-						<div class="item GENERIC">
-							<span class="label">Ability</span>
-							<select class="GENERIC"><option value="null">Choose</option></select>
-						</div>
 						<div class="item SKILL">
 							<span class="label">Skill</span>
 							<select class="SKILLGROUP"><option value="null">Choose</option></select>
@@ -326,18 +252,6 @@
 					</div>
 					<h3>Secondary</h3>
 					<div class="secondary skillset">
-						<div class="item type">
-							<span class="label">Choose</span>
-							<select class="type">
-								<option value="NONE">None</option>
-								<option value="GENERIC">Ability</option>
-								<option value="SKILL">Skill</option>
-							</select>
-						</div>
-						<div class="item GENERIC">
-							<span class="label">Ability</span>
-							<select class="GENERIC"><option value="null">Choose</option></select>
-						</div>
 						<div class="item SKILL">
 							<span class="label">Skill</span>
 							<select class="SKILLGROUP"><option value="null">Choose</option></select>
@@ -354,18 +268,6 @@
 					</div>
 					<h3>Tertiary</h3>
 					<div class="tertiary skillset">
-						<div class="item type">
-							<span class="label">Choose</span>
-							<select class="type">
-								<option value="NONE">None</option>
-								<option value="GENERIC">Ability</option>
-								<option value="SKILL">Skill</option>
-							</select>
-						</div>
-						<div class="item GENERIC">
-							<span class="label">Ability</span>
-							<select class="GENERIC"><option value="null">Choose</option></select>
-						</div>
 						<div class="item SKILL">
 							<span class="label">Skill</span>
 							<select class="SKILLGROUP"><option value="null">Choose</option></select>
@@ -381,21 +283,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="career">
-					<h2>Career</h2>
-					<div class="item">
-						<span class="label">Points needed for Level 1</span><input type="text" class="number" readonly="readonly" id="max_career_1" min="0" max="7" step="1" value="5" />
-					</div>
-					<div class="item">
-						<span class="label">Points needed for Level 2</span><input type="text" class="number" readonly="readonly" id="max_career_2" min="0" max="5" step="1" value="0" />
-					</div>
-					<div class="item">
-						<span class="label">Points needed for Level 3</span><input type="text" class="number" readonly="readonly" id="max_career_3" min="0" max="3" step="1" value="0" />
-					</div>
-				</div>
 			</div>
 			<div class="rendering">
-				<canvas id="canvas" width="759" height="582">
+				<canvas id="canvas" width="761" height="263">
 				</canvas>
 				<div id="validation_errors">
 				</div>
@@ -404,9 +294,8 @@
 				<p class="save">
 					<a target="_blank" class="download">Download</a>
 				</p>
-				<p class="save">If you want to keep the configuration and come back later, Bookmark <a class="save">this link</a>. It contains all attributes and settings (except the character image).
+				<p class="save">If you want to keep the configuration and come back later, Bookmark <a class="save">this link</a>.
 				</p>
-				<p>For great character images, use PNGs with a transparent background. Adding empty space above the head gives great results. A few sample images are available for <a href="CharacterSamples.zip">download</a>.</p>
 				<p class="copyright">Core Space and all associated characters, names, places and things are ™ and © Battle Systems Ltd 2019. Used with permission. <a href="http://www.battlesystems.co.uk">www.battlesystems.co.uk</a></p>
 			</div>
 		</div>
