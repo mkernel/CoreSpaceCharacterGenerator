@@ -23,6 +23,7 @@
 			.text {
 				height: 31px;
 				font-size: 1em;
+				width: 100px;
 			}
 			
 			select {
@@ -276,7 +277,7 @@
 			<div class="tabs">
 				<div class="placeholder first"></div>
 				<a class="tabitem" href="index.html">Character Generator</a>
-				<a class="tabitem active" href="class_generator.html">Class Generator</a>	
+				<a class="tabitem active" href="class_generator.html">Class Generator</a>
 				<div class="placeholder last"></div>
 			</div>
 			<div class="setup">
@@ -334,7 +335,7 @@
 				</div>
 				<div class="generic">
 					<h2>Generic Setup</h2>
-					<div>
+					<div class="item">
 						<span class="label">Background</span>
 						<select class="background">
 							<option value="blue">Blue</option>
@@ -344,12 +345,16 @@
 							<option value="purple">Purple</option>
 						</select>
 					</div>
-					<div>
+					<div class="item">
 						<span class="label">Template</span>
 						<select class="template">
 							<option value="normal">Normal</option>
 							<option value="mech">Mech</option>
 						</select>
+					</div>
+					<div class="item">
+						<span class="Label">Class Name</span>
+						<input type="text" class="classname text">
 					</div>
 				</div>
 			</div>

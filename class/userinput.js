@@ -7,6 +7,7 @@ $(window).on('load',function(){
 		window.kickingoff=true;
 		//lets create a characterset.
 		var dataset={};
+		dataset.ActiveClass = $("input.classname").val();
 		dataset.ActiveBackground = $("select.background").val();
 		dataset.ActiveTemplate = $("select.template").val();
 		dataset.ActiveSkills = [];
@@ -43,6 +44,11 @@ $(window).on('load',function(){
 					$("select.SKILL",elem).trigger('change');
 				}
 			});
+			$("select.background").val(dataset.ActiveBackground);
+			$("select.background").trigger('change');
+			$("select.template").val(dataset.ActiveTemplate);
+			$("select.template").trigger('change');
+			$("input.classname").val(dataset.ActiveClass);
 			//we need to fire our label updating logic.
 		}
 		Object.keys(dataset).forEach(function(key){

@@ -62,7 +62,7 @@ class ClassRenderer {
 			{x:695,y:125},
 		];
 		
-		
+		this.ActiveClass="TEMP";
 		this.ActiveBackground='blue';
 		this.ActiveTemplate='normal';
 		this.ActiveSkills=[];
@@ -106,6 +106,18 @@ class ClassRenderer {
 				this.drawSkill(this.Positions[this.ActiveTemplate][i].x,this.Positions[this.ActiveTemplate][i].y,this.ActiveSkills[i]);
 			}
 		}
+		
+				if(typeof(FontFace) =='undefined') {
+			context.font = "55px Terminat";
+		} else {
+			context.font = "55px terminator";
+		}				
+		context.fillStyle = "black";
+		context.strokeStyle = "white";
+		context.lineWidth = 2;
+		context.fillText(this.ActiveClass,22,59);
+		context.strokeText(this.ActiveClass,22,59);
+
 		return this.canvas.toDataURL('image/png');
 	}
 }
