@@ -52,6 +52,7 @@
 			}
 			
 			.setup {
+				clear: both;
 				display: flex;
 				flex-direction: row;
 				flex-wrap: wrap;
@@ -157,6 +158,43 @@
 			.rendering > * {
 				position: absolute;
 			}
+			
+			.tabs {
+				display: flex;
+				flex-direction: row;
+				margin-left: -10px;
+				margin-right: -10px;
+			}
+			
+			.tabitem {
+				flex-basis: 280px;
+				background-color: #f1f1f1;
+				display: block;
+				border: none;
+				outline: none;
+				text-decoration: none;
+				color: black;
+				padding: 14px 16px;
+				border-top: 1px solid #ccc;
+				border-left: 1px solid #ccc;
+				border-right: 1px solid #ccc;
+			}
+			
+			.tabitem.active {
+				background-color: #ccc;
+			}
+			
+			.placeholder.last {
+				flex-basis: 100%;
+				flex-grow: 1;
+				border-bottom: 1px solid #ccc;
+			}
+			
+			.placeholder.first {
+				flex-basis: 10px;
+				flex-shrink: 0;
+				border-bottom: 1px solid #ccc;
+			}
 		</style>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="jquery-ui/jquery-ui.js"></script>
@@ -256,7 +294,13 @@
 			</div>
 		</div>
 		<div class="content">
-			<h1>Core Space Character Creator</h1>
+			<h1>Core Space Creator</h1>
+			<div class="tabs">
+				<div class="placeholder first"></div>
+				<a class="tabitem active" href="index.html">Character Generator</a>
+				<a class="tabitem" href="class_generator.html">Class Generator</a>	
+				<div class="placeholder last"></div>
+			</div>
 			<div class="setup">
 				<div class="character">
 					<h2>Define your character</h2>

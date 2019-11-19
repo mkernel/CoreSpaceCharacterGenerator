@@ -76,7 +76,7 @@
 				max-width: 400px;
 			}
 						
-			.setup .career {
+			.setup .generic {
 				flex-basis: auto;
 				flex-grow: 0;
 			}
@@ -140,6 +140,8 @@
 				padding-right: 10px;
 				box-sizing: border-box;
 				border-radius: 18px;
+				
+				display: none;
 			}
 			
 			#remove_image {
@@ -157,17 +159,57 @@
 			.rendering > * {
 				position: absolute;
 			}
+			
+			.tabs {
+				display: flex;
+				flex-direction: row;
+				margin-left: -10px;
+				margin-right: -10px;
+			}
+			
+			.tabitem {
+				flex-basis: 280px;
+				background-color: #f1f1f1;
+				display: block;
+				border: none;
+				outline: none;
+				text-decoration: none;
+				color: black;
+				padding: 14px 16px;
+				border-top: 1px solid #ccc;
+				border-left: 1px solid #ccc;
+				border-right: 1px solid #ccc;
+			}
+			
+			.tabitem.active {
+				background-color: #ccc;
+			}
+			
+			.placeholder.last {
+				flex-basis: 100%;
+				flex-grow: 1;
+				border-bottom: 1px solid #ccc;
+			}
+			
+			.placeholder.first {
+				flex-basis: 10px;
+				flex-shrink: 0;
+				border-bottom: 1px solid #ccc;
+			}
+
 		</style>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="jquery-ui/jquery-ui.js"></script>
+		<script src="class/renderer.js"></script>
+		<script src="class/userinput.js"></script>
 	</head>
 	<body>
 		<div id="resources">
 			<img id="background_red" src="class_bits/background_red.png">
 			<img id="background_green" src="class_bits/background_green.png">
-			<img id="background_blue" src="class_bits/background_blue">
-			<img id="background_purple" src="class_bits/background_purple">
-			<img id="background_yellow" src="class_bits/background_yellow">
+			<img id="background_blue" src="class_bits/background_blue.png">
+			<img id="background_purple" src="class_bits/background_purple.png">
+			<img id="background_yellow" src="class_bits/background_yellow.png">
 			<img id="artwork" src="class_bits/artwork.png">
 			<img id="template_normal" src="class_bits/template_normal.png">
 			<img id="template_mech" src="class_bits/template_mech.png">
@@ -230,57 +272,84 @@
 			</div>
 		</div>
 		<div class="content">
-			<h1>Core Space Class Creator</h1>
+			<h1>Core Space Creator</h1>
+			<div class="tabs">
+				<div class="placeholder first"></div>
+				<a class="tabitem" href="index.html">Character Generator</a>
+				<a class="tabitem active" href="class_generator.html">Class Generator</a>	
+				<div class="placeholder last"></div>
+			</div>
 			<div class="setup">
 				<div class="skills">
 					<h2>Skills</h2>
-					<h3>Primary</h3>
-					<div class="primary skillset">
+					<div class="skillset" data-idx="0">
 						<div class="item SKILL">
 							<span class="label">Skill</span>
 							<select class="SKILLGROUP"><option value="null">Choose</option></select>
 							<select class="SKILL"></select>
-						</div>
-						<div class="item valueX">
-							<span class="label">Value</span>
-							<input type="text" readonly="readonly" class="number valueX" value="0" min="0" max="10" step="1" />
-						</div>
-						<div class="item valueY">
-							<span class="label">Value</span>
-							<input type="text" readonly="readonly" class="number valueY" value="0" min="0" max="10" step="1" />
 						</div>
 					</div>
-					<h3>Secondary</h3>
-					<div class="secondary skillset">
+					<div class="skillset" data-idx="1">
 						<div class="item SKILL">
 							<span class="label">Skill</span>
 							<select class="SKILLGROUP"><option value="null">Choose</option></select>
 							<select class="SKILL"></select>
-						</div>
-						<div class="item valueX">
-							<span class="label">Value</span>
-							<input type="text" readonly="readonly" class="number valueX" value="0" min="0" max="10" step="1" />
-						</div>
-						<div class="item valueY">
-							<span class="label">Value</span>
-							<input type="text" readonly="readonly" class="number valueY" value="0" min="0" max="10" step="1" />
 						</div>
 					</div>
-					<h3>Tertiary</h3>
-					<div class="tertiary skillset">
+					<div class="skillset" data-idx="2">
 						<div class="item SKILL">
 							<span class="label">Skill</span>
 							<select class="SKILLGROUP"><option value="null">Choose</option></select>
 							<select class="SKILL"></select>
 						</div>
-						<div class="item valueX">
-							<span class="label">Value</span>
-							<input type="text" readonly="readonly" class="number valueX" value="0" min="0" max="10" step="1" />
+					</div>
+					<div class="skillset" data-idx="3">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
 						</div>
-						<div class="item valueY">
-							<span class="label">Value</span>
-							<input type="text" readonly="readonly" class="number valueY" value="0" min="0" max="10" step="1" />
+					</div>
+					<div class="skillset" data-idx="4">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
 						</div>
+					</div>
+					<div class="skillset" data-idx="5">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+					</div>
+					<div class="skillset" data-idx="6">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+					</div>
+				</div>
+				<div class="generic">
+					<h2>Generic Setup</h2>
+					<div>
+						<span class="label">Background</span>
+						<select class="background">
+							<option value="blue">Blue</option>
+							<option value="green">Green</option>
+							<option value="red">Red</option>
+							<option value="yellow">Yellow</option>
+							<option value="purple">Purple</option>
+						</select>
+					</div>
+					<div>
+						<span class="label">Template</span>
+						<select class="template">
+							<option value="normal">Normal</option>
+							<option value="mech">Mech</option>
+						</select>
 					</div>
 				</div>
 			</div>
