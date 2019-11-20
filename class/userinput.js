@@ -32,6 +32,27 @@ $(window).on('load',function(){
 				dataset=JSON.parse(encoded);				
 			}
 		}
+		dataset = window.businesslogic.validate(dataset);
+		if(dataset.valid == false) {
+			$("#validation_errors").empty();
+			$("#validation_errors").show();
+			$("#validation_errors").append("<h3>This configuration is not allowed</h3>");
+			dataset.validation_errors.forEach(function(error){
+				$("#validation_errors").append("<p>"+error.msg+"</p>");
+				//todo: we have an auto-fix we should provide to the user.
+			});
+			$("p.save").hide();
+		}
+		else {
+			$("#validation_errors").empty();
+			$("#validation_errors").hide();
+			$("p.save").show();
+			//lets prepare everything for storage.
+			var encoded=JSON.stringify(dataset);
+			encoded = btoa(encoded);
+			var url = "?class="+encoded;
+			$("a.save").attr('href',url);
+		}
 
 		if(readurl) {
 			//some values have been updated. we have to reapply them to the corresponding inputs.
@@ -59,11 +80,6 @@ $(window).on('load',function(){
 		});
 		var result = window.renderer.render();
 		$("a.download").attr('href',result);
-
-		var encoded=JSON.stringify(dataset);
-		encoded = btoa(encoded);
-		var url = "?class="+encoded;
-		$("a.save").attr('href',url);
 
 		window.kickingoff=false;
 	}
