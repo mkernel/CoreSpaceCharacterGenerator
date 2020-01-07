@@ -1,0 +1,183 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="jquery-ui/jquery-ui.js"></script>
+		<script src="class/renderer.js"></script>
+		<script src="class/logic.js"></script>
+		<script src="class/userinput.js"></script>
+	</head>
+	<body>
+		<div id="resources">
+			<img id="background_red" src="class_bits/background_red.png">
+			<img id="background_green" src="class_bits/background_green.png">
+			<img id="background_blue" src="class_bits/background_blue.png">
+			<img id="background_purple" src="class_bits/background_purple.png">
+			<img id="background_yellow" src="class_bits/background_yellow.png">
+			<img id="artwork" src="class_bits/artwork.png">
+			<img id="template_normal" src="class_bits/template_normal.png">
+			<img id="template_mech" src="class_bits/template_mech.png">
+			<div class="skills">
+				<div data-class="Augmented">
+					<img data-name="Accelerate" src="Bits/augmented__accelerate.png">
+					<img data-name="Blast" src="Bits/augmented__blast.png">
+					<img data-name="Energise" src="Bits/augmented__energise.png">
+					<img data-name="Manipulate" src="Bits/augmented__manipulate.png">
+				</div>
+				<div data-class="Close Assault">
+					<img data-name="Combat Expert" src="Bits/close_assault__combat_expert.png">
+					<img data-name="Disarm" src="Bits/close_assault__disarm.png"/>
+					<img data-name="Kata" src="Bits/close_assault__kata.png" />
+					<img data-name="Reflexes" src="Bits/close_assault__reflexes.png"/>
+				</div>
+				<div data-class="Cunning">
+					<img data-name="Distraction" src="Bits/cunning__distraction.png" />
+					<img data-name="Evade" src="Bits/cunning__evade.png" />
+					<img data-name="Light Fingers" src="Bits/cunning__light_fingers.png" />
+					<img data-name="Persuasion" src="Bits/cunning__persuasion.png" />
+				</div>
+				<div data-class="Endurance">
+					<img data-name="Impervious" src="Bits/endurance__impervious.png" alt="endurance__impervious" width="130" height="130" />
+					<img data-name="Onslaught" src="Bits/endurance__onslaught.png" alt="endurance__onslaught" width="130" height="130" />
+					<img data-name="Stubborn" src="Bits/endurance__stubborn.png" alt="endurance__stubborn" width="130" height="130" />
+					<img data-name="Walk it off" src="Bits/endurance__walk_it_off.png" alt="endurance__walk_it_off" width="130" height="130" />
+				</div>
+				<div data-class="Machine">
+					<img data-name="Bodyguard Protocol" src="Bits/machine__bodyguard_protocol.png" alt="machine__bodyguard_protocol" width="130" height="130" />
+					<img data-name="Overdrive" src="Bits/machine__overdrive.png" alt="machine__overdrive" width="130" height="130" />
+					<img data-name="Repair" src="Bits/machine__repair.png" alt="machine__repair" width="130" height="130" />
+					<img data-name="Reroute" src="Bits/machine__reroute.png" alt="machine__reroute" width="130" height="130" />
+					<img data-name="Scanners" src="Bits/machine__scanners.png" alt="machine__scanners" width="130" height="130" />
+				</div>
+				<div data-class="Merg">
+					<img data-name="Charge" src="Bits/merg__charge.png" alt="merg__charge" width="130" height="130" />
+					<img data-name="Disconnect" src="Bits/merg__disconnect.png" alt="merg__disconnect" width="130" height="130" />
+					<img data-name="Heel" src="Bits/merg__heel.png" alt="merg__heel" width="130" height="130" />
+					<img data-name="Sonic roar" src="Bits/merg__sonic_roar.png" alt="merg__sonic_roar" width="130" height="130" />
+				</div>
+				<div data-class="Ranged">
+					<img data-name="Counter shot" src="Bits/ranged__counter_shot.png" alt="ranged__counter_shot" width="130" height="130" />
+					<img data-name="Marksman" src="Bits/ranged__marksman.png" alt="ranged__marksman" width="130" height="130" />
+					<img data-name="Sure shot" src="Bits/ranged__sure_shot.png" alt="ranged__sure_shot" width="130" height="130" />
+					<img data-name="Weapons expert" src="Bits/ranged__weapons_expert.png" alt="ranged__weapons_expert" width="130" height="130" />
+				</div>
+				<div data-class="Stealth">
+					<img data-name="Ambush" src="Bits/stealth__ambush.png" alt="stealth__ambush" width="130" height="130" />
+					<img data-name="Camouflage" src="Bits/stealth__camouflage.png" alt="stealth__camouflage" width="130" height="130" />
+					<img data-name="Fade to black" src="Bits/stealth__fade_to_black.png" alt="stealth__fade_to_black" width="130" height="130" />
+					<img data-name="Hard to hit" src="Bits/stealth__hard_to_hit.png" alt="stealth__hard_to_hit" width="130" height="130" />
+				</div>
+				<div data-class="Tech">
+					<img data-name="Assist" src="Bits/tech__assist.png" alt="tech__assist" width="130" height="130" />
+					<img data-name="Disrupt" src="Bits/tech__disrupt.png" alt="tech__disrupt" width="130" height="130" />
+					<img data-name="Hack" src="Bits/tech__hack.png" alt="tech__hack" width="130" height="130" />
+					<img data-name="Regulate" src="Bits/tech__regulate.png" alt="tech__regulate" width="130" height="130" />
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<h1>Core Space Creator</h1>
+			<div class="tabs">
+				<div class="placeholder first"></div>
+				<a class="tabitem" href="index.html">Character Generator</a>
+				<a class="tabitem active" href="class_generator.html">Class Generator</a>
+				<a class="tabitem" href="civilian_generator.html">Civilian Generator</a>
+				<div class="placeholder last"></div>
+			</div>
+			<div class="setup">
+				<div class="skills">
+					<h2>Skills</h2>
+					<div class="skillset" data-idx="0">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+					</div>
+					<div class="skillset" data-idx="1">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+					</div>
+					<div class="skillset" data-idx="2">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+					</div>
+					<div class="skillset" data-idx="3">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+					</div>
+					<div class="skillset" data-idx="4">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+					</div>
+					<div class="skillset" data-idx="5">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+					</div>
+					<div class="skillset" data-idx="6">
+						<div class="item SKILL">
+							<span class="label">Skill</span>
+							<select class="SKILLGROUP"><option value="null">Choose</option></select>
+							<select class="SKILL"></select>
+						</div>
+					</div>
+				</div>
+				<div class="generic">
+					<h2>Generic Setup</h2>
+					<div class="item">
+						<span class="label">Background</span>
+						<select class="background">
+							<option value="blue">Blue</option>
+							<option value="green">Green</option>
+							<option value="red">Red</option>
+							<option value="yellow">Yellow</option>
+							<option value="purple">Purple</option>
+						</select>
+					</div>
+					<div class="item">
+						<span class="label">Template</span>
+						<select class="template">
+							<option value="normal">Normal</option>
+							<option value="mech">Mech</option>
+						</select>
+					</div>
+					<div class="item">
+						<span class="Label">Class Name</span>
+						<input type="text" class="classname text">
+					</div>
+				</div>
+			</div>
+			<div class="rendering">
+				<canvas id="canvas" width="761" height="263">
+				</canvas>
+				<div id="validation_errors">
+				</div>
+			</div>
+			<div class="footer">
+				<p class="save">
+					<a target="_blank" class="download">Download</a>
+				</p>
+				<p class="save">If you want to keep the configuration and come back later, Bookmark <a class="save">this link</a>.
+				</p>
+				<p class="copyright">Core Space and all associated characters, names, places and things are ™ and © Battle Systems Ltd 2019. Used with permission. <a href="http://www.battlesystems.co.uk">www.battlesystems.co.uk</a></p>
+			</div>
+		</div>
+	</body>
+</html>

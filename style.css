@@ -1,0 +1,193 @@
+@font-face {
+	font-family: "Terminat";
+	src: url('Terminat.woff');
+}
+* {
+	font-family: "Helvetica";
+}
+#resources {
+	display: none;
+}
+#canvas {
+	background-color: red;
+}
+
+.number {
+	width: 20;
+}
+.text {
+	height: 31px;
+	font-size: 1em;
+}
+
+select {
+	font-size: 1em;
+}
+
+.label {
+	display: inline-block;
+	width: 150px;
+	margin-right: 10px;
+	text-align: right;
+	vertical-align: middle;
+}
+.item {
+	padding-bottom: 5px;
+	height: 40px;
+}
+.item:before {
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+}
+
+.ui-spinner {
+	vertical-align: middle;
+}
+
+.setup {
+	clear: both;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+
+.setup > * {
+	flex-basis: 100%;
+	margin-right: 10px;
+}
+.setup .character {
+	flex-basis: auto;
+	flex-grow: 0;
+}
+
+.setup .stats {
+	flex-basis: auto;
+	flex-grow: 1;
+}
+
+.setup .character p {
+	max-width: 400px;
+}
+			
+.setup .career {
+	flex-basis: auto;
+	flex-grow: 0;
+}
+
+.setup .skills {
+	flex-basis: 500px;
+	flex-grow: 0;
+}
+
+.setup .linebreak {
+	flex-basis: 100%;
+	border: 0;
+}
+
+.content {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.footer {
+	padding-bottom: 10px;
+}
+
+canvas {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+html {
+	background-color: gray;
+}
+body {
+	margin: 0;
+}
+
+h1 {
+	padding-top: 10px;
+	font-family: "Terminat";
+	text-transform: uppercase;
+	text-align: center;
+}
+
+#validation_errors h3 {
+	color: red;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+#validation_errors p {
+	font-size: 1.2em;
+}
+#validation_errors {
+	background-color: rgba(255,172,172,0.8);
+	width: 100%;
+	height: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+	box-sizing: border-box;
+	border-radius: 18px;
+}
+
+#remove_image {
+	display: none;
+}
+
+.rendering {
+	position: relative;
+	width: 759px;
+	height: 582px;
+	margin-left: auto;
+	margin-right: auto;				
+}
+
+.rendering > * {
+	position: absolute;
+}
+
+.tabs {
+	display: flex;
+	flex-direction: row;
+	margin-left: -10px;
+	margin-right: -10px;
+}
+
+.tabitem {
+	flex-basis: 300px;
+	flex-grow: 1;
+	background-color: #f1f1f1;
+	display: block;
+	border: none;
+	outline: none;
+	text-decoration: none;
+	color: black;
+	padding: 14px 16px;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+}
+
+.tabitem.active {
+	background-color: white;
+}
+
+.placeholder.last {
+	flex-basis: 10px;
+	flex-grow: 0;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+}
+
+.placeholder.first {
+	flex-basis: 10px;
+	flex-shrink: 0;
+	border-bottom: 1px solid #ccc;
+}

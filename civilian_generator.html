@@ -1,0 +1,119 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
+		<style>
+			.setup .character {
+				flex-basis: 476px;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="jquery-ui/jquery-ui.js"></script>
+		<script src="civilian/renderer.js"></script>
+		<script src="civilian/logic.js"></script>
+		<script src="civilian/userinput.js"></script>
+	</head>
+	<body>
+		<div id="resources">
+			<img id="layer0" src="civilian_bits/layer_0.png">
+			<img id="layer1" src="civilian_bits/layer_1.png">
+			<img id="layer2" src="civilian_bits/layer_2.png">
+			<img id="layer3" >
+			<img id="layer4" src="civilian_bits/layer_4.png">
+			
+			<img id="asset_actions" src="civilian_bits/actions.png">
+			<img id="asset_armour" src="civilian_bits/armour.png">
+			<img id="asset_close_assault" src="civilian_bits/close_assault.png">
+			<img id="asset_persuasion" src="civilian_bits/persuasion.png">
+			<img id="asset_ranged_assault" src="civilian_bits/ranged_assault.png">
+			
+			<img class="rank" src="civilian_bits/rank_1.png">
+			<img class="rank" src="civilian_bits/rank_2.png">
+			<img class="rank" src="civilian_bits/rank_3.png">
+			<img class="rank" src="civilian_bits/rank_4.png">
+			
+
+			<div class="skills-general">
+				<img data-name="Huge" src="Bits/skill__general__huge.png" alt="skill__general__close_combat" width="130" height="130" />
+				<img data-name="Move" src="Bits/skill__general__move.png" alt="skill__general__move" width="130" height="130" />
+				<img data-name="Climb and jump" src="Bits/skill__general_climb_jump.png" alt="skill__general_climb_jump" width="130" height="130" />
+			</div>
+		</div>
+		<div class="content">
+			<h1>Core Space Creator</h1>
+			<div class="tabs">
+				<div class="placeholder first"></div>
+				<a class="tabitem" href="index.html">Character Generator</a>
+				<a class="tabitem" href="class_generator.html">Class Generator</a>
+				<a class="tabitem active" href="civilian_generator.html">Civilian Generator</a>
+				<div class="placeholder last"></div>
+			</div>
+			<div class="setup">
+				<div class="character">
+					<h2>Define your character</h2>
+					<div class="item">
+						<span class="label">Name</span><input type="text" class="text" id="character_name">
+					</div>
+					<div class="item">
+						<span class="label">Quote</span><input type="text" class="text" id="character_quote">
+					</div>
+					<div class="item">
+						<span class="label">Image</span> <input type="file" class="text" id="character_image" /> <button id="remove_image" value="Remove">Remove</button>
+					</div>
+				</div>
+				<div class="stats">
+					<h2>Stats</h2>
+					<div class="item">
+						<span class="label">Close Assault</span><input type="text" class="number" readonly="readonly" id="close_assault" min="1" max="3" step="1" value="1" />
+					</div>
+					<div class="item">
+						<span class="label">Ranged Assault</span><input type="text" class="number" readonly="readonly" id="ranged_assault" min="0" max="3" step="1" value="0" />
+					</div>
+					<div class="item">
+						<span class="label">Armour</span><input type="text" class="number" readonly="readonly" id="armour" min="0" max="3" step="1" value="0" />
+					</div>
+					<div class="item">
+						<span class="label">Persuade</span><input type="text" class="number" readonly="readonly" id="persuade" min="0" max="3" step="1" value="0" />
+					</div>
+					<div class="item">
+						<span class="label">Actions</span><input type="text" class="number" readonly="readonly" id="actions" min="1" max="2" step="1" value="1" />
+					</div>
+				</div>
+				<hr class="linebreak" />
+				<div class="skills">
+					<h2>Skills</h2>
+					<p>You can pick one additional Ability.</p>
+					<div class="primary skillset">
+						<div class="item GENERIC">
+							<span class="label">Ability</span>
+							<select class="GENERIC"><option value="null">Choose</option></select>
+						</div>
+						<div class="item valueX">
+							<span class="label">Value</span>
+							<input type="text" readonly="readonly" class="number valueX" value="0" min="0" max="10" step="1" />
+						</div>
+						<div class="item valueY">
+							<span class="label">Value</span>
+							<input type="text" readonly="readonly" class="number valueY" value="0" min="0" max="10" step="1" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="rendering">
+				<canvas id="canvas" width="759" height="582">
+				</canvas>
+				<div id="validation_errors">
+				</div>
+			</div>
+			<div class="footer">
+				<p class="save">
+					<a target="_blank" class="download">Download</a>
+				</p>
+				<p class="save">If you want to keep the configuration and come back later, Bookmark <a class="save">this link</a>. It contains all attributes and settings (except the character image).
+				</p>
+				<p class="copyright">Core Space and all associated characters, names, places and things are ™ and © Battle Systems Ltd 2019. Used with permission. <a href="http://www.battlesystems.co.uk">www.battlesystems.co.uk</a></p>
+			</div>
+		</div>
+	</body>
+</html>
