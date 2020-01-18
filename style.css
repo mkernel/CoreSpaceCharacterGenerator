@@ -77,6 +77,10 @@ select {
 	flex-grow: 0;
 }
 
+.setup .career p {
+	max-width: 200px;
+}
+
 .setup .skills {
 	flex-basis: 500px;
 	flex-grow: 0;
