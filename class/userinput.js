@@ -124,9 +124,9 @@ $(window).on('load',function(){
 		var template = $("select.template").val();
 		if(template == 'mech') {
 			//mechs have one slot less.
-			$("div.skillset[data-idx=5]").hide();
+			$("div.skillset[data-idx=6]").hide();
 		} else {
-			$("div.skillset[data-idx=5]").show();
+			$("div.skillset[data-idx=6]").show();
 		}
 	});
 	//finally: when everything is loaded, one kickoff to get everything in sync.
