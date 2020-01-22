@@ -96,6 +96,9 @@ $(window).on('load',function(){
 			$("#max_actions").val(dataset.maxActions);
 			$("#max_skills").val(dataset.maxSkills);
 			$("#avail_skills").val(dataset.availSkills);
+			$("#max_career_1").val(dataset.maxCareer[0]);
+			$("#max_career_2").val(dataset.maxCareer[1]);
+			$("#max_career_3").val(dataset.maxCareer[2]);
 			["Primary","Secondary","Tertiary"].forEach(function(elem){
 				if(readurl) {
 					$("div.skillset."+elem+" select.type").val(dataset.SpecialSkills[elem].Type);
@@ -135,6 +138,7 @@ $(window).on('load',function(){
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			$("#layer1").attr("src",e.target.result);
+			kickoff(false);
 		}
 		reader.readAsDataURL(file);
 		$("#character_image").hide();
