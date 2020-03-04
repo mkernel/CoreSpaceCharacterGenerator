@@ -118,7 +118,14 @@ class ClassRenderer {
 		context.fillText(this.ActiveClass,22,59);
 		context.strokeText(this.ActiveClass,22,59);
 
-		return this.canvas.toDataURL('image/png');
+		if(typeof this.downloadUrl !== 'undefined') {
+			URL.revokeObjectURL(this.downloadUrl);
+		}
+		
+		var dataurl=this.canvas.toDataURL('image/png');
+		var blob = this.dataURLtoBlob(dataurl);
+		this.downloadUrl = URL.createObjectURL(blob);
+		return this.downloadUrl;
 	}
 }
 

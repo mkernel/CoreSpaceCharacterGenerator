@@ -55,10 +55,12 @@ $(window).on('load',function(){
 		
 		if(readurl) {
 			var url = new URL(window.location.href);
-			var encoded = url.searchParams.get('character');
-			if(typeof encoded !== 'undefined' && encoded !== '' && encoded !== null) {
-				encoded = atob(encoded);
-				dataset=JSON.parse(encoded);				
+			if (typeof url.searchParams !== 'undefined') {
+				var encoded = url.searchParams.get('character');
+				if(typeof encoded !== 'undefined' && encoded !== '' && encoded !== null) {
+					encoded = atob(encoded);
+					dataset=JSON.parse(encoded);				
+				}
 			}
 		}
 

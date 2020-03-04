@@ -284,7 +284,14 @@ class CivilianRenderer {
 		context.drawImage(assetRank,-assetRank.width/2,-assetRank.height/2);
 		context.restore();
 		
-		return this.canvas.toDataURL('image/png');
+		if(typeof this.downloadUrl !== 'undefined') {
+			URL.revokeObjectURL(this.downloadUrl);
+		}
+		
+		var dataurl=this.canvas.toDataURL('image/png');
+		var blob = this.dataURLtoBlob(dataurl);
+		this.downloadUrl = URL.createObjectURL(blob);
+		return this.downloadUrl;
 	}
 }
 
