@@ -91,6 +91,15 @@ class ClassRenderer {
 		context.restore();
 	}
 
+	dataURLtoBlob(dataurl) {
+	    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+	        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		while(n--){
+	        u8arr[n] = bstr.charCodeAt(n);
+    	}
+		return new Blob([u8arr], {type:mime});
+	}
+
 	
 	render() {
 		
@@ -103,7 +112,9 @@ class ClassRenderer {
 		context.drawImage(this.templates[this.ActiveTemplate],0,0);
 		for(var i=0;i<this.ActiveSkills.length;i++) {
 			if (i < this.Positions[this.ActiveTemplate].length) {
-				this.drawSkill(this.Positions[this.ActiveTemplate][i].x,this.Positions[this.ActiveTemplate][i].y,this.ActiveSkills[i]);
+				if(typeof(this.ActiveSkills[i]) !== 'undefined') {
+					this.drawSkill(this.Positions[this.ActiveTemplate][i].x,this.Positions[this.ActiveTemplate][i].y,this.ActiveSkills[i]);
+				}
 			}
 		}
 		

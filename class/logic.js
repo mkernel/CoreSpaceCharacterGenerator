@@ -11,7 +11,7 @@ class BusinessLogic {
 		dataset.validation_errors = [];
 		var countset={};
 		for(var i=0;i<dataset.ActiveSkills.length;i++) {
-			if(typeof(dataset.ActiveSkills[i].Skill[0]) !== 'undefined') {
+			if(typeof(dataset.ActiveSkills[i]) !== 'undefined' && typeof(dataset.ActiveSkills[i].Skill[0]) !== 'undefined') {
 				if(typeof(countset[dataset.ActiveSkills[i].Skill[0]]) === 'undefined' ) {
 					countset[dataset.ActiveSkills[i].Skill[0]]=0;
 				}
