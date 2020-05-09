@@ -192,8 +192,8 @@ class BusinessLogic {
 					if(set.Skill == "Climb and jump") {
 						var sum = set.ValueX+set.ValueY;
 						if(sum <= 4) { points += 4;}
-						if(sum <= 6) { points += 8;}
-						if(sum <= 9) { points += 14;}
+						else if(sum <= 6) { points += 8;}
+						else if(sum <= 9) { points += 14;}
 					}
 					if(set.Skill == "Resurrect") {
 						if(set.ValueX == 1) { points += 4;}

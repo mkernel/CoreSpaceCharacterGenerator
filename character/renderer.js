@@ -237,6 +237,15 @@ class CharacterRenderer {
 		context.restore();
 	}
 	
+	dataURLtoBlob(dataurl) {
+	    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+	        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		while(n--){
+	        u8arr[n] = bstr.charCodeAt(n);
+    	}
+		return new Blob([u8arr], {type:mime});
+	}
+	
 	render() {
 		
 		var context = this.context;
@@ -348,8 +357,14 @@ class CharacterRenderer {
 		context.lineWidth = 1.5;
 		context.fillText(this.CharacterType,363,559);
 		context.strokeText(this.CharacterType,363,559);
+		if(typeof this.downloadUrl !== 'undefined') {
+			URL.revokeObjectURL(this.downloadUrl);
+		}
 		
-		return this.canvas.toDataURL('image/png');
+		var dataurl=this.canvas.toDataURL('image/png');
+		var blob = this.dataURLtoBlob(dataurl);
+		this.downloadUrl = URL.createObjectURL(blob);
+		return this.downloadUrl;
 	}
 }
 

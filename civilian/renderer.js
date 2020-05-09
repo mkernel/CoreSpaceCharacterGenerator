@@ -174,6 +174,16 @@ class CivilianRenderer {
 	    }
 	}
 	
+	dataURLtoBlob(dataurl) {
+	    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+	        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		while(n--){
+	        u8arr[n] = bstr.charCodeAt(n);
+    	}
+		return new Blob([u8arr], {type:mime});
+	}
+
+	
 	render() {
 		
 		var context = this.context;
@@ -284,7 +294,14 @@ class CivilianRenderer {
 		context.drawImage(assetRank,-assetRank.width/2,-assetRank.height/2);
 		context.restore();
 		
-		return this.canvas.toDataURL('image/png');
+		if(typeof this.downloadUrl !== 'undefined') {
+			URL.revokeObjectURL(this.downloadUrl);
+		}
+		
+		var dataurl=this.canvas.toDataURL('image/png');
+		var blob = this.dataURLtoBlob(dataurl);
+		this.downloadUrl = URL.createObjectURL(blob);
+		return this.downloadUrl;
 	}
 }
 
