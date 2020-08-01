@@ -38,55 +38,16 @@ class BusinessLogic {
 		dataset.updated = false;
 		dataset.validation_errors = [];
 		var career_levels = this.career_levels(dataset);
-		if(dataset.maxActions > 2 && career_levels < 3) {
-			dataset.valid = false;
-			dataset.validation_errors.push({
-				'msg':'To get more than 2 Actions 3 career levels are needed',
-				'fix':{maxActions: 2}
-			});
-		}
-		if(dataset.availHealth < dataset.maxHealth-career_levels) {
-			dataset.availHealth = dataset.maxHealth - career_levels;
-			dataset.updated = true;
-		}
 		if(dataset.availHealth > dataset.maxHealth) {
 			dataset.availHealth = dataset.maxHealth;
 			dataset.updated = true;
 		}
-		if(dataset.availSkills < dataset.maxSkills - career_levels) {
-			dataset.availSkills = dataset.maxSkills - career_levels;
-			dataset.updated = true;
-		}
-		//now we have to calculate the career stuff. First things first: sum them up.
-		var sum = 0;
-		dataset.maxCareer.forEach(function(elem){
-			sum += elem;
-		});
-		if(sum < 5) {
+		if(dataset.availHealth + dataset.availSkills > 4) {
 			dataset.valid = false;
 			dataset.validation_errors.push({
-				'msg':'You need to put at least 5 points into career.',
+				'msg':'Health and Skill added up must not exceed 4.',
 				'fix':null
 			});
-		}
-		//now lets ensure that every level is smaller than the one below.
-		if(dataset.maxCareer[1] > 0) {
-			if(dataset.maxCareer[0] <= dataset.maxCareer[1]) {
-				dataset.valid = false;
-				dataset.validation_errors.push({
-					'msg':'Career Level 1 needs more points than Career level 2.',
-					'fix':null
-				});
-			}
-		}
-		if(dataset.maxCareer[2] > 0) {
-			if(dataset.maxCareer[1] <= dataset.maxCareer[2]) {
-				dataset.valid = false;
-				dataset.validation_errors.push({
-					'msg':'Career Level 2 needs more points than Career level 3.',
-					'fix':null
-				});
-			}
 		}
 		//check generic skills and skills for value limits!
 		["Primary","Secondary","Tertiary"].forEach((function(elem){
@@ -141,6 +102,14 @@ class BusinessLogic {
 				}
 			}
 		}).bind(this));
+		dataset = this.calculatePoints(dataset);
+		if(dataset.CharacterPoints > 6) {
+			dataset.valid = false;
+			dataset.validation_errors.push({
+				'msg':'The points value of the selected skills/abilities exceeds 6.',
+				'fix':null
+			});
+		}
 		return dataset;
 	}
 	
@@ -149,16 +118,6 @@ class BusinessLogic {
 			dataset.CharacterPoints = -1;
 		} else {
 			var points = 0;
-			points += dataset.maxHealth*2;
-			points += dataset.maxActions*4;
-			points += dataset.maxSkills*2;
-			dataset.maxCareer.forEach(function(elem){points += elem});
-			var career_levels=this.career_levels(dataset);
-			var diffHealth = dataset.availHealth-(dataset.maxHealth - career_levels);
-			points += diffHealth*3;
-			
-			var diffSkills = dataset.availSkills - (dataset.maxSkills - career_levels);
-			points += diffSkills*3;
 			
 			["Primary","Secondary","Tertiary"].forEach(function(elem){
 				var set = dataset.SpecialSkills[elem];

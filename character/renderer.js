@@ -155,11 +155,8 @@ class CharacterRenderer {
 		
 	}
 	
-	drawItem(bg,active,position,offset) {
-		this.context.drawImage(bg,position.x,position.y);
-		if(active) {
-			this.context.drawImage(this.active,position.x+offset.x,position.y+offset.y);
-		}
+	drawItem(position,offset) {
+		this.context.drawImage(this.active,position.x+offset.x,position.y+offset.y);
 	}
 	
 	drawGenericSkill(skill) {
@@ -271,31 +268,26 @@ class CharacterRenderer {
 		var y = canvas.height - height;
 		context.drawImage(layers[1],x,y,width,height);
 		context.drawImage(layers[2],0,0);
+		context.drawImage(layers[3],0,0);
 		var i=0;
-		for(i=0;i<this.maxHealth;i++) {
-			var bg;
-			if(i<healthbackground.length) {
-				bg = healthbackground[i];
-			} else {
-				bg = healthbackground[healthbackground.length-1];
-			}
-			this.drawItem(bg,i<this.availHealth,
+		for(i=0;i<this.availHealth;i++) {
+			this.drawItem(
 				this.healthPositions[i],
 				this.healthOffset
 			);
 		}
 		
 		i=0;
-		for(i=0;i<this.maxActions;i++) {
-			this.drawItem(actionbackground,i<this.availActions,
+		for(i=0;i<this.availActions;i++) {
+			this.drawItem(
 				this.actionPositions[i],
 				this.actionOffset
 			);
 		}
 		
 		i=0;
-		for(i=0;i<this.maxSkills;i++) {
-			this.drawItem(skillsbackground,i<this.availSkills,
+		for(i=0;i<this.availSkills;i++) {
+			this.drawItem(
 				this.skillsPositions[i],
 				this.skillsOffset
 			);
@@ -303,15 +295,16 @@ class CharacterRenderer {
 		
 		i=0;
 		var j=0;
-		for(j=0;j<this.maxCareer.length;j++) {
-			for(i=0;i<this.maxCareer[j];i++) {
-				this.drawItem(careerbackground,i<this.availCareer[j],
+		for(j=0;j<this.availCareer.length;j++) {
+			for(i=0;i<this.availCareer[j];i++) {
+				this.drawItem(
 					this.careerPositions[j][i],
 					this.careerOffset
 				);
 			}
 		}
-
+		
+		
 		if(typeof(FontFace) =='undefined') {
 			context.font = "55px Terminat";
 		} else {
@@ -333,17 +326,6 @@ class CharacterRenderer {
 		context.fillText(this.CharacterName,292,59);
 		context.strokeText(this.CharacterName,292,59);
 		
-		if(typeof(FontFace) =='undefined') {
-			context.font = "59px Terminat";
-		} else {
-			context.font = "59px terminator";
-		}
-		var text = this.CharacterPoints + "";
-		if(this.CharacterPoints < 10) {
-			text = "0"+text;
-		}
-		context.fillText(text,22,559);
-		context.strokeText(text,22,559);
 
 		this.drawSkill(60, 460, this.SpecialSkills.Primary);
 		this.drawSkill(180,520, this.SpecialSkills.Secondary);

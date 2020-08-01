@@ -11,10 +11,10 @@
 	</head>
 	<body>
 		<div id="resources">
-			<img id="layer0" src="Layer0_background.png">
+			<img id="layer0" src="CS-RPG-board-layer0.png">
 			<img id="layer1" >
 			<img id="layer2" src="Layer2_armour.png">
-			<img id="layer3" src="Layer3_markers.png">
+			<img id="layer3" src="CS-RPG-board-layer3.png">
 			<img id="layer4" src="Layer4_activemarkers.png">
 			<img id="layer5" src="Layer5_text.png">
 			
@@ -122,7 +122,7 @@
 			</div>
 		</div>
 		<div class="content">
-			<h1>Core Space Creator</h1>
+			<h1>Core Space RPG Creator (by Andy Jackson)</h1>
 			<div class="tabs">
 				<div class="placeholder first"></div>
 				<a class="tabitem active" href="index.html">Character Generator</a>
@@ -150,19 +150,10 @@
 				<div class="stats">
 					<h2>Stats</h2>
 					<div class="item">
-						<span class="label">Maximum Health</span><input type="text" class="number" readonly="readonly" id="max_health" min="3" max="7" step="1" value="3" />
+						<span class="label">Available Health</span><input type="text" class="number" readonly="readonly" id="avail_health" min="1" max="4" step="1" value="1" />
 					</div>
 					<div class="item">
-						<span class="label">Available Health</span><input type="text" class="number" readonly="readonly" id="avail_health" min="2" max="7" step="1" value="2" />
-					</div>
-					<div class="item">
-						<span class="label">Maximum Action Points</span><input type="text" class="number" readonly="readonly" id="max_actions" min="1" max="3" step="1" value="1" />
-					</div>
-					<div class="item">
-						<span class="label">Maximum Skill Points</span><input type="text" class="number" readonly="readonly" id="max_skills" min="1" max="7" step="1" value="1" />
-					</div>
-					<div class="item">
-						<span class="label">Available Skill Points</span><input type="text" class="number" readonly="readonly" id="avail_skills" min="1" max="7" step="1" value="1" />
+						<span class="label">Available Skill Points</span><input type="text" class="number" readonly="readonly" id="avail_skills" min="0" max="3" step="1" value="0" />
 					</div>
 				</div>
 				<hr class="linebreak" />
@@ -252,18 +243,6 @@
 							<span class="label">Value</span>
 							<input type="text" readonly="readonly" class="number valueY" value="0" min="0" max="10" step="1" />
 						</div>
-					</div>
-				</div>
-				<div class="career">
-					<h2>Career</h2>
-					<div class="item">
-						<span class="label">Points needed for Level 1</span><input type="text" class="number" readonly="readonly" id="max_career_1" min="0" max="7" step="1" value="5" />
-					</div>
-					<div class="item">
-						<span class="label">Points needed for Level 2</span><input type="text" class="number" readonly="readonly" id="max_career_2" min="0" max="5" step="1" value="0" />
-					</div>
-					<div class="item">
-						<span class="label">Points needed for Level 3</span><input type="text" class="number" readonly="readonly" id="max_career_3" min="0" max="3" step="1" value="0" />
 					</div>
 				</div>
 			</div>

@@ -7,14 +7,14 @@ $(window).on('load',function(){
 		window.kickingoff=true;
 		//lets create a characterset.
 		var dataset={};
-		dataset.maxHealth = parseInt($("#max_health").val());
+		dataset.maxHealth = 11;
 		dataset.availHealth = parseInt($("#avail_health").val());
-		dataset.maxActions = parseInt($("#max_actions").val());
-		dataset.availActions = Math.min(dataset.maxActions,2);
+		dataset.maxActions = 4;
+		dataset.availActions = 2;
 		dataset.maxSkills = parseInt($("#max_skills").val());
 		dataset.availSkills = parseInt($("#avail_skills").val());
-		dataset.maxCareer = [parseInt($("#max_career_1").val()),parseInt($("#max_career_2").val()),parseInt($("#max_career_3").val())];
-		dataset.availCareer = [Math.ceil(dataset.maxCareer[0]/2)];
+		dataset.maxCareer = [7,7,7];
+		dataset.availCareer = [2];
 		dataset.CharacterRace = $("#character_race").val().toUpperCase();
 		dataset.CharacterName = $("#character_name").val().toUpperCase();
 		dataset.CharacterType = $("#character_type").val().toUpperCase();
@@ -123,7 +123,7 @@ $(window).on('load',function(){
 			//we need to fire our label updating logic.
 			$("input.number").trigger('change');
 		}
-		dataset = window.businesslogic.calculatePoints(dataset);
+		//dataset = window.businesslogic.calculatePoints(dataset);
 		Object.keys(dataset).forEach(function(key){
 			if(key == "valid" || key == "updated" || key == "validation_errors") {
 				return;
