@@ -215,7 +215,7 @@ class CharacterRenderer {
 		var context = this.context;
 		context.save();
 		context.translate(centerX,centerY);
-		context.scale(0.8,0.8);
+		context.scale(0.60,0.60);
 		if(typeof(FontFace) =='undefined') {
 			context.font = "37px Terminat";
 		} else {
@@ -327,8 +327,8 @@ class CharacterRenderer {
 		context.strokeText(this.CharacterName,292,59);
 		
 
-		this.drawSkill(60, 460, this.SpecialSkills.Primary);
-		this.drawSkill(180,520, this.SpecialSkills.Secondary);
+		this.drawSkill(60, 470, this.SpecialSkills.Primary);
+		this.drawSkill(180,540, this.SpecialSkills.Secondary);
 		this.drawSkill(610,430, this.SpecialSkills.Tertiary);
 		
 		if(typeof(FontFace) =='undefined') {
