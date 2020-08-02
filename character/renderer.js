@@ -331,14 +331,7 @@ class CharacterRenderer {
 		this.drawSkill(180,540, this.SpecialSkills.Secondary);
 		this.drawSkill(610,430, this.SpecialSkills.Tertiary);
 		
-		if(typeof(FontFace) =='undefined') {
-			context.font = "37px Terminat";
-		} else {
-			context.font = "37px terminator";
-		}
-		context.lineWidth = 1.5;
-		context.fillText(this.CharacterType,363,559);
-		context.strokeText(this.CharacterType,363,559);
+		
 		if(typeof this.downloadUrl !== 'undefined') {
 			URL.revokeObjectURL(this.downloadUrl);
 		}

@@ -17,7 +17,6 @@ $(window).on('load',function(){
 		dataset.availCareer = [2];
 		dataset.CharacterRace = $("#character_race").val().toUpperCase();
 		dataset.CharacterName = $("#character_name").val().toUpperCase();
-		dataset.CharacterType = $("#character_type").val().toUpperCase();
 		
 		dataset.SpecialSkills = { };
 		dataset.SpecialSkills.Primary = { };
