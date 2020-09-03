@@ -113,7 +113,7 @@ $(window).on('load',function(){
 		
 	});
 	$("#layer3").on('load',function(){
-		window.renderer.render();
+		kickoff(false);
 	});
 	
 	//we have everything we need so lets fill out the dropdowns first.

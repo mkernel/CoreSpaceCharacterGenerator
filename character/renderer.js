@@ -361,9 +361,9 @@ class CharacterRenderer {
 			URL.revokeObjectURL(this.downloadUrl);
 		}
 		
-		var dataurl=this.canvas.toDataURL('image/png');
-		var blob = this.dataURLtoBlob(dataurl);
-		this.downloadUrl = URL.createObjectURL(blob);
+		this.dataurl=this.canvas.toDataURL('image/png');
+		this.blob = this.dataURLtoBlob(this.dataurl);
+		this.downloadUrl = URL.createObjectURL(this.blob);
 		return this.downloadUrl;
 	}
 }
