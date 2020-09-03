@@ -158,7 +158,6 @@ $(window).on('load',function(){
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			$("#layer1").attr("src",e.target.result);
-			kickoff(false);
 		}
 		reader.readAsDataURL(file);
 		$("#character_image").hide();
@@ -173,7 +172,7 @@ $(window).on('load',function(){
 		
 	});
 	$("#layer1").on('load',function(){
-		window.renderer.render();
+		kickoff(false);
 	});
 	
 	//we have everything we need so lets fill out the dropdowns first.
@@ -249,6 +248,7 @@ $(window).on('load',function(){
 	//if validation succeeds we need the point calculator and afterwards a rendering step.
 	//so... time for some business logic!
 	$("input, select").on('change',function(){
+		if($(this).attr('id')=="character_image") return;
 		kickoff();
 	});
 	$("input.number").on('spinstop',function(){
