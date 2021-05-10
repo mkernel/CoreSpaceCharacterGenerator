@@ -244,31 +244,28 @@ class CivilianRenderer {
 		context.strokeStyle = "black";
 		context.textAlign = "center";
 		context.translate(685,503);
-		if(this.Persuasion > 0) {
-			context.drawImage(assetPersuasion,-assetPersuasion.width/2,-assetPersuasion.height/2);
-			context.fillText(this.Persuasion+"",0,0);
-			context.strokeText(this.Persuasion+"",0,0);
-		}
+
+		context.drawImage(assetPersuasion,-assetPersuasion.width/2,-assetPersuasion.height/2);
+		context.fillText(this.Persuasion+"",0,0);
+		context.strokeText(this.Persuasion+"",0,0);
+
 		context.translate(0,-120);
-		if(this.Armour > 0) {
-			context.drawImage(assetArmour,-assetArmour.width/2,-assetArmour.height/2);
-			context.fillText(this.Armour+"",0,10);
-			context.strokeText(this.Armour+"",0,10);
-		}
+
+		context.drawImage(assetArmour,-assetArmour.width/2,-assetArmour.height/2);
+		context.fillText(this.Armour+"",0,10);
+		context.strokeText(this.Armour+"",0,10);
 		
 		context.translate(0,-120);
-		if(this.RangedAssault > 0) {
-			context.drawImage(assetRangedAssault,-assetRangedAssault.width/2,-assetRangedAssault.height/2);
-			context.fillText(this.RangedAssault+"",0,10);
-			context.strokeText(this.RangedAssault+"",0,10);
-		}
+
+		context.drawImage(assetRangedAssault,-assetRangedAssault.width/2,-assetRangedAssault.height/2);
+		context.fillText(this.RangedAssault+"",0,10);
+		context.strokeText(this.RangedAssault+"",0,10);
 		
 		context.translate(0,-120);
-		if(this.CloseAssault > 0) {
-			context.drawImage(assetCloseAssault,-assetCloseAssault.width/2,-assetCloseAssault.height/2);
-			context.fillText(this.CloseAssault+"",0,10);
-			context.strokeText(this.CloseAssault+"",0,10);
-		}
+
+		context.drawImage(assetCloseAssault,-assetCloseAssault.width/2,-assetCloseAssault.height/2);
+		context.fillText(this.CloseAssault+"",0,10);
+		context.strokeText(this.CloseAssault+"",0,10);
 		
 		context.restore();
 		context.save();
